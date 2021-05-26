@@ -21,22 +21,30 @@ public class ThemeService implements IThemeService {
     }
 
     @Override
+    public void deleteTheme(Long id) {
+        themeRepository.deleteById(id);
+    }
+
+    @Override
     public Iterable<Theme> findAll() {
-        return null;
+
+        return themeRepository.findAll();
     }
 
     @Override
     public Optional<Theme> findById(Long id) {
-        return Optional.empty();
+
+        return themeRepository.findById(id);
     }
 
     @Override
     public Theme save(Theme theme) {
-        return null;
+
+        return themeRepository.save(theme);
     }
 
     @Override
     public void remove(Long id) {
-
+        themeRepository.deleteById(id);
     }
 }

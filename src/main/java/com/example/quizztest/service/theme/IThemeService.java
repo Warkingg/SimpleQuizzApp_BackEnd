@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 
 public interface IThemeService extends IGeneralService <Theme> {
     Theme addTheme(Theme theme);
+
+    void deleteTheme(Long id );
 }

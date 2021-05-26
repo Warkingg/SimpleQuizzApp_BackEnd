@@ -23,21 +23,21 @@ public class QuestionService implements IQuestionService{
 
     @Override
     public Iterable<Question> findAll() {
-        return null;
+        return questionRepository.findAll();
     }
 
     @Override
     public Optional<Question> findById(Long id) {
-        return Optional.empty();
+        return questionRepository.findById(id);
     }
 
     @Override
     public Question save(Question question) {
-        return null;
+        return questionRepository.save(question);
     }
 
     @Override
     public void remove(Long id) {
-
+        questionRepository.deleteById(id);
     }
 }
