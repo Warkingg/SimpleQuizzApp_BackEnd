@@ -1,6 +1,7 @@
 package com.example.quizztest.service.level;
 
 import com.example.quizztest.dto.LevelDto;
+import com.example.quizztest.dto.ThemeDto;
 import com.example.quizztest.model.Level;
 import com.example.quizztest.model.OrikaBeanMapper;
 import com.example.quizztest.model.Theme;
@@ -49,6 +50,12 @@ public class LevelManager implements ILevelManager {
     @Override
     public LevelDto getLevel(Long idTheme) {
         return orikaBeanMapper.convertDTO(levelRepository.getOne(idTheme), LevelDto.class);
+    }
+
+    @Override
+    public List<LevelDto> getAllLevels() {
+        List<Level> levels = levelRepository.findAll();
+        return orikaBeanMapper.convertListDTO(levels, LevelDto.class);
     }
 
 }

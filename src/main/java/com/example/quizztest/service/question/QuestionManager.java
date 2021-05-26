@@ -1,9 +1,11 @@
 package com.example.quizztest.service.question;
 
 import com.example.quizztest.dto.QuestionDto;
+import com.example.quizztest.dto.ThemeDto;
 import com.example.quizztest.model.Level;
 import com.example.quizztest.model.OrikaBeanMapper;
 import com.example.quizztest.model.Question;
+import com.example.quizztest.model.Theme;
 import com.example.quizztest.repository.ILevelRepository;
 import com.example.quizztest.repository.IQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +46,10 @@ public class QuestionManager implements IQuestionManager{
         List<Question> questions = level.getQuestions();
         return orikaBeanMapper.convertListDTO(questions, QuestionDto.class);
     }
+
+    @Override
+    public List<QuestionDto> getQuestion() {
+            List<Question> questions = questionRepository.findAll();
+            return orikaBeanMapper.convertListDTO(questions, QuestionDto.class);
+        }
 }

@@ -9,4 +9,7 @@ public interface IQuestionManager {
     QuestionDto addQuestion(QuestionDto questionDto, Long idLevel);
 
     List<QuestionDto> getQuestions(Long idLevel);
+
+    List<QuestionDto> getQuestion();
+
 }

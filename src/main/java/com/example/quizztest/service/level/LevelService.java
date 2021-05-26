@@ -28,23 +28,24 @@ public class LevelService implements ILevelService {
         return levelRepository.save(level);
     }
 
+
     @Override
     public Iterable<Level> findAll() {
-        return null;
+        return levelRepository.findAll();
     }
 
     @Override
     public Optional<Level> findById(Long id) {
-        return Optional.empty();
+        return levelRepository.findById(id);
     }
 
     @Override
     public Level save(Level level) {
-        return null;
+        return levelRepository.save(level);
     }
 
     @Override
     public void remove(Long id) {
-
+        levelRepository.deleteById(id);
     }
 }
