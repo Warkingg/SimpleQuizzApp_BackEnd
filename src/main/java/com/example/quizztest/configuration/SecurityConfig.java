@@ -58,13 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/**", "/api/getResponses/**", "/api/updateQuestion/**").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.cors();
+        http.cors().disable();
     }
 }
