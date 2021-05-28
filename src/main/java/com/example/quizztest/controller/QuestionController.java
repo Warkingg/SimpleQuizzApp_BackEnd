@@ -2,8 +2,10 @@ package com.example.quizztest.controller;
 
 import com.example.quizztest.dto.QuestionDto;
 import com.example.quizztest.dto.ThemeDto;
+import com.example.quizztest.model.Level;
 import com.example.quizztest.model.Question;
 import com.example.quizztest.model.Theme;
+import com.example.quizztest.service.level.ILevelService;
 import com.example.quizztest.service.question.IQuestionManager;
 import com.example.quizztest.service.question.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/api")
 @ResponseBody
 @RestController
 @CrossOrigin("*")
 public class QuestionController {
+    @Autowired
+    private ILevelService levelService;
     @Autowired
     private IQuestionManager questionManager;
     @Autowired
@@ -36,10 +41,17 @@ public class QuestionController {
     }
 
     @PutMapping("/updateQuestion/{id}")
-    public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
-        Question updateQuestion = questionService.save(question);
-        return new ResponseEntity<>(updateQuestion, HttpStatus.OK);
+    public ResponseEntity<Question> updateQuestion(@RequestBody Question question, @PathVariable Long id) {
+        Optional<Question> questionOptional = questionService.findById(id);
+        if (!questionOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        question.setId(questionOptional.get().getId());
+        return new ResponseEntity<>(questionService.save(question), HttpStatus.OK);
+
     }
+
+
 
     @DeleteMapping("/deleteQuestion/{id}")
     public ResponseEntity<?> deleteQuestion(@PathVariable("id") Long id) {
