@@ -35,8 +35,8 @@ public class QuestionController {
         return questionManager.getQuestion();
     }
 
-    @PutMapping("/updateQuestion")
-    public ResponseEntity<Question> updateQuestion(@RequestBody Question question) {
+    @PutMapping("/updateQuestion/{id}")
+    public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
         Question updateQuestion = questionService.save(question);
         return new ResponseEntity<>(updateQuestion, HttpStatus.OK);
     }
